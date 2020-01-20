@@ -81,7 +81,7 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(title); //pour evite de faire de + "" + ""+..etc
+		StringBuilder builder = new StringBuilder(title); //pour eviter de faire de + "" + ""+..etc
 		return builder.append(" (")
 				.append(year)
 				.append(')')
