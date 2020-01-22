@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table 
+@Table (name = "persons")
 public class Person {
 
 	private Integer idPerson;
@@ -67,7 +67,13 @@ public class Person {
 	
 	@Override
 	public String toString() {
-		return name + " (" + Objects.toString(birthdate, "unknow") + ") ";
-	
+		StringBuilder builder = new StringBuilder(name); //pour eviter de faire de + "" + ""+..etc
+		return builder.append(" (")
+					.append(Objects.toString(birthdate, "unknow"))
+					.append(')')
+					.append('#')
+					.append(idPerson)
+					.toString(); 
 	}
+	
 }

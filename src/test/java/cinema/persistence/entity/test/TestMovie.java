@@ -2,6 +2,7 @@ package cinema.persistence.entity.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import cinema.persistance.entity.Movie;
+import cinema.persistance.entity.Person;
 import cinema.persistance.repository.MovieRepository;
 
 @DataJpaTest //h2 par défaut
@@ -27,7 +29,7 @@ class TestMovie {
 	EntityManager entityManager;
 
 	@Test
-	void testInsert() {
+	void testSave() {
 		Movie movie = new Movie("Joker", 2019);
 		//hbn.persist(movie); //sauvegarder le film dans la base de donnée
 		repoMovie.save(movie);
@@ -36,6 +38,19 @@ class TestMovie {
 		assertNotNull(id);
 	}
 	
+	
+	@Test
+	void testSaveWithDirector() {
+		//given
+		Person person = new Person ("Todd Phillips", LocalDate.of(1970, 12, 20));
+		Movie movie = new Movie("Joker", 2019, 165, person);
+		entityManager.persist(person);
+		//when
+		repoMovie.save(movie);
+		//then
+		System.out.println(person);
+		System.out.println(movie);
+	}
 	
 	@Test
 	void testSelectAll() {

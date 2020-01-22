@@ -23,7 +23,7 @@ public class TestPerson {
 	@Autowired
 	EntityManager entityManager;
 	
-	
+
 	@Test
 	void testSave () {
 		Person person = new Person ("Clint Eastwood", LocalDate.of(1930, 5, 31));
