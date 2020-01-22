@@ -1,5 +1,8 @@
 package cinema.persistance.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,9 +25,11 @@ public class Movie {
 	private Integer year;
 	private Integer duration; //Integer peut être nulle car c'est une référence a un objet et non int qui est primitif
 	private Person director;
+	private List<Person> actors;
 	
+
 	public Movie() {
-		super();
+		this(null,null);
 	}
 	
 	public Movie(String title, Integer year) {
@@ -44,6 +51,7 @@ public class Movie {
 		this.year = year;
 		this.duration = duration;
 		this.director = director;
+		this.actors = new ArrayList<>();
 	}
 //tout mot avec @ -> annotation
 	
@@ -84,7 +92,7 @@ public class Movie {
 		this.duration = duration;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY) //pour eviter d'aller chercher des infos qu'on a pas demandé
+	@ManyToOne
 	@JoinColumn(name="id_director",nullable=true)
 	public Person getDirector() {
 		return director;
@@ -92,6 +100,21 @@ public class Movie {
 
 	public void setDirector(Person director) {
 		this.director = director;
+	}
+	
+	@ManyToMany
+	@JoinTable(name="act",
+    joinColumns=
+        @JoinColumn(name="id_movie"),
+    inverseJoinColumns=
+        @JoinColumn(name="id_actors")
+    )
+	public List<Person> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Person> actors) {
+		this.actors = actors;
 	}
 
 	@Override

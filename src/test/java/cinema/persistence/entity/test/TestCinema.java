@@ -3,6 +3,7 @@ package cinema.persistence.entity.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -69,14 +70,25 @@ class TestCinema {
 	}
 
 	
+	
+	@Rollback(false)
 	@Test
-	void scenarioSelectByDirector() {
-		var data1 = repoMovies.findByDirectorNameEndingWith("Eastwood");
-		var nolan = repoPersons.findByName("Christopher Nolan")
-				.stream().findFirst().get();
-		var data2 = repoMovies.findByDirector(nolan);
-		System.out.println(data1);
-		System.out.println(data2);
+	void scenarioMovieWithDirector1 () {
+		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
+		var clint = repoPersons.findByName("Clint Eastwood").stream().findFirst().get();
+		var gene = repoPersons.findByName("Gene Hackman").stream().findFirst().get();
+		impitoyable.setActors(List.of(clint,gene));
+		repoMovies.flush();
 	}
 	
+//	@Test
+//	void scenarioSelectByDirector() {
+//		var data1 = repoMovies.findByDirectorNameEndingWith("Eastwood");
+//		var nolan = repoPersons.findByName("Christopher Nolan")
+//				.stream().findFirst().get();
+//		var data2 = repoMovies.findByDirector(nolan);
+//		System.out.println(data1);
+//		System.out.println(data2);
+//	}
+//	
 }
