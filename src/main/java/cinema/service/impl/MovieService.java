@@ -5,13 +5,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cinema.persistance.entity.Movie;
 import cinema.persistance.repository.MovieRepository;
 import cinema.persistance.repository.PersonRepository;
 import cinema.service.IMovieService;
 
+@Service
+@Transactional
 public class MovieService implements IMovieService {
 	
 	@Autowired
@@ -47,7 +52,7 @@ public class MovieService implements IMovieService {
 	}
 
 	@Override
-	public Set<Movie> getmovieByActor(int idActor) {
+	public Set<Movie> getMovieByActor(int idActor) {
 		// TODO Auto-generated method stub
 		return movieRepository.findByActorsIdPerson(idActor);
 	}

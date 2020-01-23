@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cinema.persistance.entity.Movie;
-import cinema.persistance.repository.MovieRepository;
-import cinema.persistance.repository.PersonRepository;
+
 import cinema.service.IMovieService;
 
 @RestController
