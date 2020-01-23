@@ -102,7 +102,7 @@ public class Movie {
 		this.director = director;
 	}
 	
-	@ManyToMany
+	@ManyToMany //(fetch = FetchType.EAGER)
 	@JoinTable(name="act",
     joinColumns=
         @JoinColumn(name="id_movie"),

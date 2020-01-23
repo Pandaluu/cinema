@@ -22,6 +22,12 @@ public class Person {
 		super();
 	}
 	
+	
+	public Person(String name) {
+		this(null,name,null);
+	}
+
+
 	public Person(Integer idPerson, String name) {
 		this(idPerson, name, null);
 	}

@@ -31,4 +31,10 @@ public class TestPerson {
 		System.out.println(person);
 	}
 	
+	@Test
+	void testSave2() {
+		Person person = new Person ("Joss Whedon", LocalDate.of(1964, 6, 23));
+		repoPerson.save(person);
+		System.out.println(person);
+	}
 }

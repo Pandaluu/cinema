@@ -73,13 +73,33 @@ class TestCinema {
 	
 	@Rollback(false)
 	@Test
-	void scenarioMovieWithDirector1 () {
+	void scenarioMovieWithDirector1 (){
 		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
 		var clint = repoPersons.findByName("Clint Eastwood").stream().findFirst().get();
 		var gene = repoPersons.findByName("Gene Hackman").stream().findFirst().get();
 		impitoyable.setActors(List.of(clint,gene));
 		repoMovies.flush();
 	}
+	
+	@Rollback(false)
+	@Test
+	void scenarioMovieAddActor() {
+		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
+		var morgan = repoPersons.findByName("Morgan Freeman").stream().findFirst().get();
+		impitoyable.getActors().add(morgan);
+		repoMovies.flush();
+	}	
+		
+	
+	@Rollback(false)
+	@Test
+	void testLazyActors() {
+		//read a movie : select the movie + its director
+		var impitoyable = repoMovies.findByTitle("Impitoyable").stream().findFirst().get();
+		//read actors
+		var actors = impitoyable.getActors();
+	}
+
 	
 //	@Test
 //	void scenarioSelectByDirector() {
